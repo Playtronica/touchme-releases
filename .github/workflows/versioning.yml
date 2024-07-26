@@ -1,0 +1,43 @@
+name: versioning
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+    name: "Release"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Сheckout Repo
+        uses: actions/checkout@main
+        with:
+          fetch-depth: 0
+      
+      - name: Get commit data
+        id: newtag
+        env:
+          COMMIT_TEXT: ${{ github.event.head_commit.message }}
+        run: |
+            echo "TAG_NAME=`echo '${{ env.COMMIT_TEXT }}' | grep -o 'TAG: .*' | cut -d' ' -f2 `" >> $GITHUB_OUTPUT
+            echo "RELEASE_NAME=`echo '${{ env.COMMIT_TEXT }}' | head -n 1`" >> $GITHUB_OUTPUT
+            {
+              echo 'BODY_CONTENT<<EOF'
+              echo '${{ env.COMMIT_TEXT }}' | sed -n '/Body: /,/^\$/p' | sed 's/Body: //'
+              echo EOF
+            } >> $GITHUB_OUTPUT
+            
+      - name: Check vars
+        run: |
+            echo "${{ steps.newtag.outputs.TAG_NAME }}"
+            echo "${{ steps.newtag.outputs.RELEASE_NAME }}"
+            echo "${{ steps.newtag.outputs.BODY_CONTENT }}"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.newtag.outputs.RELEASE_NAME }}
+          tag_name: ${{ steps.newtag.outputs.TAG_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: output/*.uf2
+          body: "${{ steps.newtag.outputs.BODY_CONTENT }}"
