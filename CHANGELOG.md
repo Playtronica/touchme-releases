@@ -12,3 +12,7 @@ All notable changes to this project will be documented in this file.
 - Buttons can not be pressed in playing mode
 
 
+## v1.0.1
+### Changed
+- Buttons and Music are disabled when device gets SysEx from WebMIDI
+
