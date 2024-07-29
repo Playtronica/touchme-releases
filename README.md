@@ -46,21 +46,16 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#load-firmware">Load Firmware</a></li>
       </ul>
     </li>
-    <li><a href="#contributing">Contributing</li>
+    <li><a href="#continuous-controllers">Continuous Controllers</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -91,90 +86,37 @@ Measure resistance change between two contacts and transposes it into MIDI (musi
 
 
 
-### Built With
-
-* [Docker](https://www.docker.com/)
-* [Raspberry Pi Pico SDK](https://github.com/raspberrypi/pico-sdk)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
+### Load Firmware
 
-### Prerequisites
+For loading device you need firmware file. You can get it in different ways:
+1) Load firmware from [releases](https://github.com/Playtronica/touchme-releases/releases/latest)
+2) Open [WebMidi](https://playtronica.github.io/WebMidiVue/#/touchme) and press "Update Firmware".
+   (It also change device state in boot mode)
 
-Install docker, example for Ubuntu 20.04
+After that you need to turn on boot mode on device:
 
-```sh
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-sudo apt update
-sudo apt install make docker-ce 
-```
+1) If your device is already have one of the latest firmwares -
+   Open [WebMidi](https://playtronica.github.io/WebMidiVue/#/touchme) and press "Update Firmware"
+   (You also get the latest firmware)
+2) If your firmware version is not latest, or you have problems with first method -
+   while you are connecting device to PC, lock boot pins
 
-### Build and flash with docker (Recomended way)
+The device will be displayed as removable media (like a USB flash drive).
+You should transfer the resulting .uf2 file to the removable media that appeared.
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/Playtronica/Touchme.git
-   ```
-2. Setup build image
-   ```sh
-   make build_image
-   ```
-3. Build binary
-   ```sh
-   make build
-   ```
-4. Boot touchme in bootloader mode
-- * Span the two boot contacts with something metal
-- * Plug in USB cable
-- * Will appear mass storage device
-
-5. Copy `touchme.uf2` from `output` dir to touchme mass storage device  
-  Example:
-    ```sh
-    cp output/touchme.uf2 /media/user/RPI-RP2
-    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- COMMANDS -->
+## Continuous Controllers
+**Continuous Controllers** - MIDI messages,
+which are used to patch data for parameters.
 
-
-
-
-<!-- ROADMAP -->
-<!-- ## Roadmap
-
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
-
-See the [open issues](https://github.com/Playtronica/Touchme/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#top">back to top</a>)</p> -->
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Get list of TouchMe's CC [here](./CC.md)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -193,8 +135,8 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-* Project Link: [https://github.com/Playtronica/Touchme](https://github.com/Playtronica/Touchme)
-* Our website: [https://playtronica.com/](https://laytronica.com/)
+* Project Link: [https://github.com/Playtronica/touchme-releases](https://github.com/Playtronica/touchme-releases)
+* Our website: [https://playtronica.com/](https://playtronica.com/)
 
 ### Social media
 * [Facebook](https://www.facebook.com/playtronica)
@@ -205,16 +147,6 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- ACKNOWLEDGMENTS -->
-<!-- ## Acknowledgments
-
-* []()
-* []()
-* []()
-
-<p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
 
